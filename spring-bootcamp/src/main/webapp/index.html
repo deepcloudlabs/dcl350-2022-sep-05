@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires" content="Sat, 01 Dec 2001 00:00:00 GMT">
+<title>World Search Page</title>
+<style type="text/css">
+@import url('css/world.css');
+</style>
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/knockout-3.3.0.js"></script>
+<script type="text/javascript" src="js/knockout.mapping-latest.js"></script>
+<script type="text/javascript" src="js/world.js"></script>
+</head>
+<body>
+	<div>
+		<p>
+			<label>Continent:</label> 
+			<select	data-bind="options: continents, value: country.continent"></select>
+			<button data-bind="click: list">List</button>
+		</p>
+	</div>
+	<table style="width: 640px;" data-bind="visible: countries().length > 0">
+		<thead style="width: 640px;">
+			<tr style="width: 640px;">
+				<th><button data-bind="click: sort('code')">Code</button></th>
+				<th><button data-bind="click: sort('name')">Name</button></th>
+				<th><button data-bind="click: sort('continent')">Continent</button></th>
+				<th><button data-bind="click: sortNumeric('population')">Population</button></th>
+				<th><button data-bind="click: sortNumeric('surfaceArea')">Surface
+						Area</button></th>
+				<th><button data-bind="click: sortNumeric('gnp')">GNP</button></th>
+			</tr>			
+		</thead>
+		<tbody data-bind="foreach: countries">
+			<tr>
+				<td data-bind="text: code"></td>
+				<td data-bind="text: name"></td>
+				<td data-bind="text: continent"></td>
+				<td data-bind="text: population"></td>
+				<td data-bind="text: surfaceArea"></td>
+				<td data-bind="text: gnp"></td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

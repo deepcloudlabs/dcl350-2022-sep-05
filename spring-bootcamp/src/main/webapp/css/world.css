@@ -1,0 +1,60 @@
+div {
+	display: table;
+}
+
+p {
+	display: table-row;
+}
+
+label {
+	display: table-cell;
+}
+
+select {
+	display: table-cell;
+}
+
+input {
+	display: table-cell;
+}
+
+input.reset {
+	display: inline;
+}
+
+th, td , button {
+	text-align: center;
+	vertical-align: center;
+}
+
+tbody tr:nth-child(2n) {
+	background-color: #c0c0c0;
+}
+
+tbody tr:nth-child(2n+1) {
+	background-color: #e0e0e0;
+}
+
+thead th  {
+	background: url(images/bg.jpg);
+}
+
+tbody tr:hover {
+	background-color: #ffffb3;
+}
+
+th  {
+	text-shadow: 3px 3px 9px black;
+	color: white;
+	border: none;
+}
+
+td {
+	text-shadow: 6px 6px 6px white;
+	color: black;
+}
+
+label {
+	color: black;
+	text-shadow: 3px 3px 9px #c0c0c0;
+}

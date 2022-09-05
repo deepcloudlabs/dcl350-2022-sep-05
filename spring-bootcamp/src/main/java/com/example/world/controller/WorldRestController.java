@@ -37,11 +37,13 @@ public class WorldRestController {
     	
     }
 
+    // curl -X GET http://localhost:9200/world/api/v1/continents
 	@GetMapping("/continents")
 	public Collection<String> getContinents() {
-		return countryDao.getAllContinents();
+		return countryDao.getAllContinents().stream().sorted().toList();
 	}
 
+	// curl -X GET http://localhost:9200/world/api/v1/countries/Asia
 	@GetMapping(value = "/countries/{continent}")
 	public List<Country> getCountriesByContinent(@PathVariable String continent) {
 		return countryDao.findCountriesByContinent(continent);

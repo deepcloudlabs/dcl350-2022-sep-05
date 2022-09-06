@@ -14,6 +14,14 @@ public final class FullName {
 		this.lastName = lastName;
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
 	public static FullName of(String firstName, String lastName) {
 		Objects.requireNonNull(firstName);
 		Objects.requireNonNull(lastName);

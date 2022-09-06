@@ -15,6 +15,10 @@ public final class TcKimlikNo {
 		this.value = value;
 	}
 
+	public String getValue() {
+		return value;
+	}
+
 	// Effective Java Programming 3rd Ed. Joshua Bloch
 	public static TcKimlikNo valueOf(String value) { // factory method
 		if (!isValid(value))

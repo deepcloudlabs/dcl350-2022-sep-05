@@ -63,4 +63,8 @@ public final class Money {
 		return "Money [value=" + value + ", currency=" + currency + "]";
 	}
 
+	public Money multiply(double rate) {
+		return Money.valueOf(value * rate, currency);
+	}
+
 }

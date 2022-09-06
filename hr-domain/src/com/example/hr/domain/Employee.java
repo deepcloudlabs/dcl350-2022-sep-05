@@ -19,7 +19,12 @@ public class Employee {
 	private JobStyle jobStyle;
 	private Photo photo;
 	private BirthYear birthYear;
-
+	
+	public Money increaseSalary(double rate) {
+		this.salary = this.salary.multiply(1.0 + rate/100.);
+		return this.salary;
+	}
+	
 	public Employee(Builder builder) {
 		this.identity = builder.identity;
 		this.fullname = builder.fullname;

@@ -4,6 +4,7 @@ import java.util.List;
 
 public class StudyImmutability {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		int z = 42; // 4-byte
 		Integer x = Integer.valueOf(42); 

@@ -2,6 +2,7 @@ package com.example.hr.domain;
 
 import java.util.Objects;
 
+import com.example.ddd.DomainAggregate;
 import com.example.ddd.DomainEntity;
 
 // modeling, abstraction
@@ -10,6 +11,7 @@ import com.example.ddd.DomainEntity;
 // DDD: Entity -> Aggregate Root, Value Object (VO)
 // Entity -> i) persistent, ii) identity iii) business methods -> mutable
 @DomainEntity(identity = { "identity" })
+@DomainAggregate
 public class Employee {
 	private TcKimlikNo identity;
 	private FullName fullname;

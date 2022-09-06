@@ -36,12 +36,12 @@ public class HrRestController { //Adapter: http protocol <--> Java Class
 	}
 
 	@PostMapping
-	public HireEmployeeResponse hireEmployee(@RequestBody HireEmployeeRequest request) {
+	public EmployeeResponse hireEmployee(@RequestBody HireEmployeeRequest request) {
 		return hrService.hireEmployee(request);
 	}
 
 	@DeleteMapping("/{identity}")
-	public FireEmployeeResponse hireEmployee(@PathVariable String identity) {
+	public EmployeeResponse hireEmployee(@PathVariable String identity) {
 		return hrService.fireEmployee(identity);
 	}
 

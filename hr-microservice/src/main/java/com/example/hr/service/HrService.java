@@ -5,11 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.hr.application.HrApplication;
+import com.example.hr.application.exception.EmployeeNotFoundException;
+import com.example.hr.application.exception.ExistingEmployeeException;
+import com.example.hr.domain.Employee;
 import com.example.hr.domain.TcKimlikNo;
 import com.example.hr.dto.EmployeeResponse;
-import com.example.hr.dto.FireEmployeeResponse;
 import com.example.hr.dto.HireEmployeeRequest;
-import com.example.hr.dto.HireEmployeeResponse;
 
 @Service
 public class HrService {
@@ -28,15 +29,24 @@ public class HrService {
 	}
 
 	@Transactional
-	public HireEmployeeResponse hireEmployee(HireEmployeeRequest request) {
-		
-		return null;
+	public EmployeeResponse hireEmployee(HireEmployeeRequest request) {
+		var employee = modelMapper.map(request,Employee.class);
+		try {
+			employee = hrApplication.hireEmployee(employee);
+		} catch (ExistingEmployeeException e) {
+		    throw new IllegalArgumentException(e.getMessage()); 
+		}
+		return modelMapper.map(employee,EmployeeResponse.class);
 	}
 
 	@Transactional
-	public FireEmployeeResponse fireEmployee(String identity) {
-		// TODO Auto-generated method stub
-		return null;
+	public EmployeeResponse fireEmployee(String identity) {
+		try {
+			var employee = hrApplication.fireEmployee(TcKimlikNo.valueOf(identity));
+			return modelMapper.map(employee,EmployeeResponse.class);
+		} catch (EmployeeNotFoundException e) {
+		    throw new IllegalArgumentException(e.getMessage()); 
+		}
 	}
 
 }

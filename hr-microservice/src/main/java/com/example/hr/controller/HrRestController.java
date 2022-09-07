@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.annotation.RequestScope;
 
 import com.example.hr.dto.EmployeeResponse;
-import com.example.hr.dto.FireEmployeeResponse;
 import com.example.hr.dto.HireEmployeeRequest;
-import com.example.hr.dto.HireEmployeeResponse;
 import com.example.hr.service.HrService;
 
 @RestController
@@ -30,16 +28,19 @@ public class HrRestController { //Adapter: http protocol <--> Java Class
 		this.hrService = hrService;
 	}
 
+	// GET http://localhost:4200/hr/api/v1/employees/11111111110
 	@GetMapping("/{identity}")
 	public ResponseEntity<EmployeeResponse> getEmployeeByIdentity(@PathVariable String identity) {
 		return ResponseEntity.ok(hrService.findEmployeeById(identity));
 	}
 
+	// POST http://localhost:4200/hr/api/v1/employees
 	@PostMapping
 	public EmployeeResponse hireEmployee(@RequestBody HireEmployeeRequest request) {
 		return hrService.hireEmployee(request);
 	}
 
+	// DELETE http://localhost:4200/hr/api/v1/employees/11111111110
 	@DeleteMapping("/{identity}")
 	public EmployeeResponse hireEmployee(@PathVariable String identity) {
 		return hrService.fireEmployee(identity);

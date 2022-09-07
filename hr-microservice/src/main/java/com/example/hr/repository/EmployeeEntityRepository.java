@@ -10,8 +10,8 @@ import com.example.hr.entity.EmployeeEntity;
 public interface EmployeeEntityRepository extends JpaRepository<EmployeeEntity, String>{
 	List<EmployeeEntity> findAllByBirthYearBetween(int fromYear,int toYear);
 	// JPQL (JPA Query Language)
-	@Query("select emp from EmployeeEntity e where e.birthYear between :fromyear and :toYear")
+	@Query("select e from EmployeeEntity e where e.birthYear between :fromYear and :toYear")
 	List<EmployeeEntity> calisanlariGetirYasAraligi(int fromYear,int toYear);
-	@Query(nativeQuery = true,value =  "select emp from employees e where e.birthYear between :fromyear and :toYear")
+	@Query(nativeQuery = true,value =  "select e from employees e where e.yil between :fromYear and :toYear")
 	List<EmployeeEntity> nativeCalisanlariGetirYasAraligi(int fromYear,int toYear);
 }

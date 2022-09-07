@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.example.hr.domain.Employee;
 import com.example.hr.dto.EmployeeResponse;
+import com.example.hr.entity.EmployeeEntity;
 
 @Configuration
 public class ModelMapperConfig {
@@ -26,10 +27,42 @@ public class ModelMapperConfig {
 		return employeeResponse;
 	};
 	
+	private static final Converter<EmployeeEntity, Employee> EMPLOYEE_ENTITY_TO_EMPLOYEE_CONVERTER =  context -> {
+		var entity = context.getSource();
+		var employee = new Employee.Builder(entity.getIdentity())
+				                   .fullname(entity.getFirstName(), entity.getLastName())
+				                   .iban(entity.getIban())
+				                   .salary(entity.getSalary(), entity.getCurrency())
+				                   .department(entity.getDepartment().name())
+				                   .jobStyle(entity.getJobStyle().name())
+				                   .birthYear(entity.getBirthYear())
+				                   .photo(entity.getPhoto())
+				                   .build();
+		return employee;
+	};
+	
+	private static final Converter<Employee, EmployeeEntity> EMPLOYEE_TO_EMPLOYEE_ENTITY_CONVERTER =  context -> {
+		var employee = context.getSource();
+		var entity = new EmployeeEntity();
+		entity.setIdentity(employee.getIdentity().getValue());
+		entity.setFirstName(employee.getFullname().getFirstName());
+		entity.setLastName(employee.getFullname().getLastName());
+		entity.setIban(employee.getIban().getValue());
+		entity.setSalary(employee.getSalary().getValue());
+		entity.setCurrency(employee.getSalary().getCurrency());
+		entity.setBirthYear(employee.getBirthYear().getYear());
+		entity.setDepartment(employee.getDepartment());
+		entity.setJobStyle(employee.getJobStyle());
+		entity.setPhoto(employee.getPhoto().getValues());
+		return entity;
+	};	
+	
 	@Bean
 	public ModelMapper createModelMapper() {
 		var modelMapper = new ModelMapper();
 		modelMapper.addConverter(EMPLOYEE_TO_EMPLOYEE_RESPONSE_CONVERTER, Employee.class, EmployeeResponse.class);
+		modelMapper.addConverter(EMPLOYEE_ENTITY_TO_EMPLOYEE_CONVERTER, EmployeeEntity.class, Employee.class);
+		modelMapper.addConverter(EMPLOYEE_TO_EMPLOYEE_ENTITY_CONVERTER, Employee.class, EmployeeEntity.class);
 		return modelMapper;
 	}
 }

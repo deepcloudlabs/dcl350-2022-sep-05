@@ -36,5 +36,6 @@ public class EmployeeEntity {
 	@Lob
 	@Column(columnDefinition = "longblob")
 	private byte[] photo;
+	@Column(name="yil")
 	private int birthYear;	
 }

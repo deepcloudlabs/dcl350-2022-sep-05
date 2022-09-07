@@ -36,7 +36,7 @@ public class EmployeeRepositoryJpaAdapter implements EmployeeRepository {
 
 	@Override
 	public Employee persist(Employee employee) {
-		var entity = empRepo.save(modelMapper.map(employee,EmployeeEntity.class));
+		var entity = empRepo.saveAndFlush(modelMapper.map(employee,EmployeeEntity.class));
 		return modelMapper.map(entity,Employee.class);
 	}
 

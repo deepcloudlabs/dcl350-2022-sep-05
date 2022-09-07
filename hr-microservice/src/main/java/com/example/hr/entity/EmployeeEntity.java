@@ -11,6 +11,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.example.hr.domain.Department;
 import com.example.hr.domain.FiatCurrency;
 import com.example.hr.domain.JobStyle;
@@ -21,6 +23,7 @@ import lombok.Data;
 @Entity
 @Table(name="employees")
 @Data
+@DynamicUpdate
 public class EmployeeEntity {
 	@Id
 	@TcKimlikNo

@@ -28,7 +28,7 @@ public class HrService {
 		return modelMapper.map(employee, EmployeeResponse.class);
 	}
 
-	@Transactional
+	@Transactional()
 	public EmployeeResponse hireEmployee(HireEmployeeRequest request) {
 		var employee = modelMapper.map(request,Employee.class);
 		try {

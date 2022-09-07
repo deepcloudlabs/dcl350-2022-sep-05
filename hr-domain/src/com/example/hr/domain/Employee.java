@@ -27,6 +27,9 @@ public class Employee {
 		return this.salary;
 	}
 	
+	public Employee() {
+	}
+
 	public Employee(Builder builder) {
 		this.identity = builder.identity;
 		this.fullname = builder.fullname;

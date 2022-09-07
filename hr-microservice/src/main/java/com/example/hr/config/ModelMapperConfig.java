@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.example.hr.domain.Employee;
 import com.example.hr.dto.EmployeeResponse;
+import com.example.hr.dto.HireEmployeeRequest;
 import com.example.hr.entity.EmployeeEntity;
 
 @Configuration
@@ -57,10 +58,26 @@ public class ModelMapperConfig {
 		return entity;
 	};	
 	
+	private static final Converter<HireEmployeeRequest, Employee> HIRE_EMPLOYEE_REQUEST_TO_EMPLOYEE_CONVERTER =  context -> {
+		HireEmployeeRequest request = context.getSource();
+		var employee = new Employee.Builder(request.getIdentity())
+				                   .fullname(request.getFirstName(), request.getLastName())
+				                   .iban(request.getIban())
+				                   .salary(request.getSalary(), request.getCurrency())
+				                   .department(request.getDepartment().name())
+				                   .jobStyle(request.getJobStyle().name())
+				                   .birthYear(request.getBirthYear())
+				                   .photo(request.getPhoto())
+				                   .build();
+		return employee;
+	};
+	
+
 	@Bean
 	public ModelMapper createModelMapper() {
 		var modelMapper = new ModelMapper();
 		modelMapper.addConverter(EMPLOYEE_TO_EMPLOYEE_RESPONSE_CONVERTER, Employee.class, EmployeeResponse.class);
+		modelMapper.addConverter(HIRE_EMPLOYEE_REQUEST_TO_EMPLOYEE_CONVERTER, HireEmployeeRequest.class, Employee.class);
 		modelMapper.addConverter(EMPLOYEE_ENTITY_TO_EMPLOYEE_CONVERTER, EmployeeEntity.class, Employee.class);
 		modelMapper.addConverter(EMPLOYEE_TO_EMPLOYEE_ENTITY_CONVERTER, Employee.class, EmployeeEntity.class);
 		return modelMapper;

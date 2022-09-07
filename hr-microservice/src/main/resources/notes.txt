@@ -1,0 +1,16 @@
+I) Run the following scripts:
+1) c:\DEVEL\stage\var\scripts\start-mysqld.bat
+2) c:\DEVEL\stage\var\scripts\start-zookeeper.bat
+3) c:\DEVEL\stage\var\scripts\start-kafka-broker.bat
+
+II) Drop database then create hrdb:
+1) c:\DEVEL\stage\var\scripts\mysql-cli.bat
+
+drop database hrdb;
+create database hrdb;
+
+III) Run the hr-microservice in "Boot Dashboard" in STS
+
+IV) Open the swagger-ui in a web browser
+
+http://localhost:4200/hr/api/v1/swagger-ui

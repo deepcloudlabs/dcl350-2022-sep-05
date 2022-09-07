@@ -15,13 +15,14 @@ import org.springframework.web.context.annotation.RequestScope;
 import com.example.hr.dto.EmployeeResponse;
 import com.example.hr.dto.HireEmployeeRequest;
 import com.example.hr.service.HrService;
+import com.example.validation.TcKimlikNo;
 
 @RestController
 @RequestScope
 @RequestMapping("/employees")
 @Validated
 @CrossOrigin
-public class HrRestController { //Adapter: http protocol <--> Java Class
+public class HrRestController { // Adapter: http protocol <--> Java Class
 	private HrService hrService;
 
 	public HrRestController(HrService hrService) {
@@ -30,19 +31,19 @@ public class HrRestController { //Adapter: http protocol <--> Java Class
 
 	// GET http://localhost:4200/hr/api/v1/employees/11111111110
 	@GetMapping("/{identity}")
-	public ResponseEntity<EmployeeResponse> getEmployeeByIdentity(@PathVariable String identity) {
+	public ResponseEntity<EmployeeResponse> getEmployeeByIdentity(@PathVariable @TcKimlikNo String identity) {
 		return ResponseEntity.ok(hrService.findEmployeeById(identity));
 	}
 
 	// POST http://localhost:4200/hr/api/v1/employees
 	@PostMapping
-	public EmployeeResponse hireEmployee(@RequestBody HireEmployeeRequest request) {
+	public EmployeeResponse hireEmployee(@RequestBody @Validated HireEmployeeRequest request) {
 		return hrService.hireEmployee(request);
 	}
 
 	// DELETE http://localhost:4200/hr/api/v1/employees/11111111110
 	@DeleteMapping("/{identity}")
-	public EmployeeResponse hireEmployee(@PathVariable String identity) {
+	public EmployeeResponse hireEmployee(@PathVariable @TcKimlikNo String identity) {
 		return hrService.fireEmployee(identity);
 	}
 

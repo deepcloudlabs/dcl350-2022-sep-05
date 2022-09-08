@@ -1,0 +1,10 @@
+1. Change configuration.
+   Example: lottery.properties -> lotteryMax=100
+2. Commit the change
+   git add .
+   git commit -m "make lotteryMax=100"
+      
+3. Send a POST request to the microservice instance:
+   curl -X POST "http://localhost:4700/api/v1/actuator/refresh" -d "{}" -H "Content-Type: application/json" -H "Accept: application/json"      
+   
+      

@@ -8,6 +8,10 @@ public class LotteryDTO {
 	public LotteryDTO() {
 	}
 
+	public LotteryDTO(List<Integer> lotteryNumbers) {
+		this.lotteryNumbers = lotteryNumbers;
+	}
+
 	public List<Integer> getLotteryNumbers() {
 		return lotteryNumbers;
 	}

@@ -27,6 +27,7 @@ public class HrRestController { // Adapter: http protocol <--> Java Class
 
 	public HrRestController(HrService hrService) {
 		this.hrService = hrService;
+		System.err.println("HrRestController: hrService.getClass(): %s.".formatted(hrService.getClass()));
 	}
 
 	// GET http://localhost:4200/hr/api/v1/employees/11111111110

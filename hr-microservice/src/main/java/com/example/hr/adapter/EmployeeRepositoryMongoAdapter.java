@@ -6,29 +6,29 @@ import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 
+import com.example.hr.document.EmployeeDocument;
 import com.example.hr.domain.Employee;
 import com.example.hr.domain.TcKimlikNo;
-import com.example.hr.entity.EmployeeEntity;
-import com.example.hr.repository.EmployeeEntityRepository;
+import com.example.hr.repository.EmployeeDocumentRepository;
 import com.example.hr.repository.EmployeeRepository;
 
 @Repository
-@ConditionalOnProperty(name="persistenceTarget", havingValue = "mysql")
-public class EmployeeRepositoryJpaAdapter implements EmployeeRepository {
-	private final EmployeeEntityRepository empRepo;
+@ConditionalOnProperty(name="persistenceTarget", havingValue = "mongodb")
+public class EmployeeRepositoryMongoAdapter implements EmployeeRepository {
+	private final EmployeeDocumentRepository empRepo;
 	private final ModelMapper modelMapper;
 	
-	public EmployeeRepositoryJpaAdapter(EmployeeEntityRepository empRepo, ModelMapper modelMapper) {
+	public EmployeeRepositoryMongoAdapter(EmployeeDocumentRepository empRepo, ModelMapper modelMapper) {
 		this.empRepo = empRepo;
 		this.modelMapper = modelMapper;
 	}
 
 	@Override
 	public Optional<Employee> findEmployeeByIdentity(TcKimlikNo identity) {
-		Optional<EmployeeEntity> employeeEntity = empRepo.findById(identity.getValue());
-		if (employeeEntity.isEmpty())
+		Optional<EmployeeDocument> employeeDocument = empRepo.findById(identity.getValue());
+		if (employeeDocument.isEmpty())
 			return Optional.empty();
-		return Optional.of(modelMapper.map(employeeEntity.get(), Employee.class));
+		return Optional.of(modelMapper.map(employeeDocument.get(), Employee.class));
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class EmployeeRepositoryJpaAdapter implements EmployeeRepository {
 
 	@Override
 	public Employee persist(Employee employee) {
-		var entity = empRepo.saveAndFlush(modelMapper.map(employee,EmployeeEntity.class));
+		var entity = empRepo.insert(modelMapper.map(employee,EmployeeDocument.class));
 		return modelMapper.map(entity,Employee.class);
 	}
 

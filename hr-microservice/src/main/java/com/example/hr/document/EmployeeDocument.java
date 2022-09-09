@@ -5,6 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -31,6 +32,7 @@ public class EmployeeDocument {
 	@NotNull
 	private FiatCurrency currency;
 	@NotBlank
+	@Indexed(unique = true)
 	private String iban;
 	@NotNull
 	private Department department;
@@ -40,5 +42,6 @@ public class EmployeeDocument {
 	private String photo;
 	@Field(name="yil")
 	@Min(1900)
+	@Indexed
 	private int birthYear;
 }

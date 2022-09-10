@@ -11,6 +11,7 @@ import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 
+@SuppressWarnings("unused")
 @Service
 public class AnotherService {
 	private final BusinessService businessService;
